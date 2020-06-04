@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: PistolData
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "\uAD8C\uCD1D"
+  id: 11
+  description: "\uB2E8\uBC1C\uC131 \uAD8C\uCD1D"
+  count: 1
+  sprite: {fileID: 9147546874185701050, guid: d12f1c2b06ab7194cafa1d48ffe3fdfa, type: 3}
+  itemType: 0
