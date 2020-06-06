@@ -18,8 +18,8 @@ public class DragSlot : MonoBehaviour
     
     public void SetDragSlot(Item target)
     {
-        this.item = target;
-        imageItem.sprite = this.item.data.sprite;
+        item = target;
+        imageItem.sprite = item.data.sprite;
         SetColor(1);
     }
 

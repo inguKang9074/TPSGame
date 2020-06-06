@@ -72,7 +72,7 @@ public class Inventory : MonoBehaviour
             else // 현재 슬롯이 빈 슬롯이라면
             {
                 // 현재 슬롯을 제외한 남은 슬롯(i+1) 중에
-                for (int j = i+1 ; j < inventorySlots.Length; j++)
+                for (int j = i + 1; j < inventorySlots.Length; j++)
                 {
                     // 같은 아이템이 있다면
                     if (inventorySlots[j].item != null && inventorySlots[j].item.data.id == target.data.id)
@@ -88,39 +88,40 @@ public class Inventory : MonoBehaviour
                 {
                     inventorySlots[i].AddItem(target, alreadyHaveItem, count); // 갯수만 증가
                 }
-                break; 
+                break;
             }
         }
     }
-
-
 
     // 장비 착용 함수
     public void EuipWeapon(Item target)
     {
         int weaponSlotIndex;
-        Gun gun = target.GetComponent<Gun>();
-        
-        switch (gun.gunType)
+        Gun gun = target as Gun;
+
+        if (target.data.itemType == ItemData.ItemType.Weapon)
         {
-            case Gun.GunType.Rifle:
-                // 0번 슬롯에 들어갈 무기
-                weaponSlotIndex = 0;
-                IsEmptyCheckWeaponSlot(gun, weaponSlotIndex);
-                break;
-            case Gun.GunType.Pistol:
-                // 1번 슬롯에 들어갈 무기
-                weaponSlotIndex = 1;
-                IsEmptyCheckWeaponSlot(gun, weaponSlotIndex);
-                break;
+            switch (gun.gunType)
+            {
+                case Gun.GunType.Rifle:
+                    // 0번 슬롯에 들어갈 무기
+                    weaponSlotIndex = 0;
+                    IsEmptyCheckWeaponSlot(gun, weaponSlotIndex);
+                    break;
+                case Gun.GunType.Pistol:
+                    // 1번 슬롯에 들어갈 무기
+                    weaponSlotIndex = 1;
+                    IsEmptyCheckWeaponSlot(gun, weaponSlotIndex);
+                    break;
+            }
         }
     }
 
     // 탄약 착용 함수
     public void EquipAmmo(AmmoPack target)
     {
-        bool alreadyEquip;
-       
+        bool alreadyWear;
+
         for (int i = 0; i < weaponSlots.Length; i++) // 무기 슬롯을 돌면서
         {
             if (weaponSlots[i].item != null) // 현재 무기 슬롯이 비지 않았고
@@ -132,8 +133,8 @@ public class Inventory : MonoBehaviour
                     // 현재 무기 슬롯의 총알과 add 하려는 총알이 같다면
                     if (gun.ammoPack.data.id == target.data.id)
                     {
-                        alreadyEquip = true;
-                        ammoSlots[i].AddItem(target, alreadyEquip, target.data.count); 
+                        alreadyWear = true;
+                        ammoSlots[i].AddItem(target, alreadyWear, target.data.count);
                         // 총알 갯수 추가
                         break;
                     }
@@ -142,11 +143,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     // 장비슬롯이 비어있는지 체크하는 함수
     private void IsEmptyCheckWeaponSlot(Gun target, int index)
     {
         bool alreadyEquipWeapon;
+
         // 장비 슬롯이 비었는지 체크
         if (weaponSlots[index].item == target) // 현재 index슬롯에 target이 있는지
         {
@@ -162,14 +163,9 @@ public class Inventory : MonoBehaviour
 
     public void ClearAmmoSlot(Item target) // 총알 슬롯 비우기
     {
-        AmmoPack ammo = target.GetComponent<Gun>().ammoPack;
-
-        if (ammo == null)
-            return;
-
         foreach (var slot in ammoSlots)
         {
-            if (ammo.data.id == slot.item.data.id)
+            if (target.data.id == slot.item.data.id)
             {
                 slot.Clear();
             }

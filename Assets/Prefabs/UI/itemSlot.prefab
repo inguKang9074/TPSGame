@@ -140,8 +140,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: -8007783468873404364, guid: ea06bd0641acb364cbbdd576ebd511b0,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef704344c87aac845a8f5a57793e5927, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -243,16 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c8caf9dd15e2a498def6c93f3d5b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData:
-    name: 
-    id: 
-    description: 
-    counter: 0
-    sprite: {fileID: 0}
-    itemType: 0
+  item: {fileID: 0}
   isEmpty: 1
-  emptySlotSprite: {fileID: 21300000, guid: 09aba99d91398ae49bf8335855b2c44f, type: 3}
-  icon: {fileID: 9040311097520344866}
+  emptyStateImage: {fileID: 21300000, guid: ef704344c87aac845a8f5a57793e5927, type: 3}
+  itemIcon: {fileID: 9040311097520344866}
   itemCount: {fileID: 9040311097872924299}
   itemName: {fileID: 0}
   itemDescription: {fileID: 0}

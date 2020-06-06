@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fc047d6b95041209056067c6f5e9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  data: {fileID: 11400000, guid: d841cd86e9fd35d41a5bf13a76538831, type: 2}
+  health: 20
 --- !u!135 &4721196287580293431
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -126,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 60
-  velocity: 60
 --- !u!222 &3710241055873356359
 CanvasRenderer:
   m_ObjectHideFlags: 0

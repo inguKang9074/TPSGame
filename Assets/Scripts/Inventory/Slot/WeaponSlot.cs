@@ -13,6 +13,7 @@ public class WeaponSlot : Slot, IPointerClickHandler
     [SerializeField] private Text timeBetFireText; // 연사력
     [SerializeField] private Text reloadText; // 재장전 시간 
     [SerializeField] private Text damageText; // 데미지
+    [SerializeField] private Image ammoSlotImage; // 총알 슬롯 이미지
 
     // 장착 슬롯에 아이템 장착
     public override void AddItem(Item target, bool alreadyEquipWeapon, int count = 1)
@@ -21,6 +22,8 @@ public class WeaponSlot : Slot, IPointerClickHandler
         {
             return;
         }
+
+        isEmpty = false;
 
         item = target;
         Gun gun = item.GetComponent<Gun>();
@@ -41,11 +44,13 @@ public class WeaponSlot : Slot, IPointerClickHandler
     public override void Clear()
     {
         item = null;
-        weaponIcon.sprite = emptySlotSprite;
-        itemName.text = "";
-        timeBetFireText.text = "";
-        reloadText.text = "";
-        damageText.text = "";
+        weaponIcon.sprite = emptyStateImage;
+        ammoSlotImage.sprite = emptyStateImage;
+
+        itemName.text = "무기명:";
+        timeBetFireText.text = "연사력:";
+        reloadText.text = "재장전시간:";
+        damageText.text = "공격력";
     }
 
     // 슬롯 클릭시 이벤트 함수
@@ -60,5 +65,4 @@ public class WeaponSlot : Slot, IPointerClickHandler
             Debug.Log("무기장착 해제!");
         }
     }
-
 }

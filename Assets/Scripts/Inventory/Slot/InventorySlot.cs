@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : Slot, IPointerClickHandler, IBeginDragHandler,IDragHandler, IEndDragHandler, IDropHandler
-{ 
-    // 인벤토리 관련 UI
+public class InventorySlot : Slot, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+{
+    // 인벤토리 관련 UI   
     [SerializeField] private Image itemIcon;
     [SerializeField] private Text itemCount;
 
@@ -15,10 +15,10 @@ public class InventorySlot : Slot, IPointerClickHandler, IBeginDragHandler,IDrag
     [SerializeField] private Image descriptionIcon;
 
     // 슬롯에 아이템 추가
-    public override void AddItem(Item target, bool alreadyHaveItem, int count = 1) 
+    public override void AddItem(Item target, bool alreadyHaveItem, int count = 1)
     {
         isEmpty = false; // 슬롯에 아이템이 추가 됬으니 빈상태가 아니다.
-        this.item = target;     
+        this.item = target;
         itemIcon.sprite = target.data.sprite;
 
         // 소지중인 아이템이고 무기가 아니라면 슬롯에 갯수를 표시한다
@@ -48,7 +48,7 @@ public class InventorySlot : Slot, IPointerClickHandler, IBeginDragHandler,IDrag
         itemCount.text = "";
         itemName.text = "";
         itemDescription.text = "";
-        itemIcon.sprite = emptySlotSprite;
+        itemIcon.sprite = emptyStateImage;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -102,8 +102,8 @@ public class InventorySlot : Slot, IPointerClickHandler, IBeginDragHandler,IDrag
 
             AddItem(DragSlot.instance.item, isHaveItem, DragSlot.instance.item.data.count);
 
-            DragSlot.instance.dragSlot.Clear(); 
-            
+            DragSlot.instance.dragSlot.Clear();
+
         }
         else // 비지 않았다면
         {
@@ -111,7 +111,7 @@ public class InventorySlot : Slot, IPointerClickHandler, IBeginDragHandler,IDrag
             if (item == DragSlot.instance.item) // 드래그한 아이템이 현재 슬롯 아이템과 같다면
             {
                 isHaveItem = true;
-                AddItem(DragSlot.instance.item, isHaveItem, DragSlot.instance.item.data.count);  
+                AddItem(DragSlot.instance.item, isHaveItem, DragSlot.instance.item.data.count);
             }
             else
             {

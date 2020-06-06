@@ -35,11 +35,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (playerInput.OpenInventory) 
+        if (playerInput.OpenInventory)
         {
             active = !active;
 
-            UIManager.Instance.OpenInventory(active); 
+            UIManager.Instance.OpenInventory(active);
             cinemachineFreeLook.enabled = !active;
             playerInput.IgnoreKeyInputWhenInventory(active);
             Cursor.visible = active;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (var gun in playerShooter.haveGuns)
         {
-            gun.ammoRemain = 120;
+            gun.ammoRemain = 150;
         }
 
         UIManager.Instance.SetActiveGameoverUI(false);
@@ -101,11 +101,11 @@ public class PlayerController : MonoBehaviour
         foreach (var gun in playerShooter.haveGuns)
         {
             //Inventory.Instance.GetItem(gun);
-            Inventory.Instance.AddItem(gun.ammoPack, gun.ammoRemain);
-
+            Inventory.Instance.AddItem(gun.ammoPack,
+                gun.ammoRemain);
         }
 
-        // 무기 장착 슬롯 세팅
+        // 무기 장착 슬롯 초기화
         foreach (var slot in playerShooter.gunSlot)
         {
             Inventory.Instance.EuipWeapon(slot); // 무기 슬롯에 현재 총 장착

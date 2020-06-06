@@ -47,7 +47,7 @@ public class Gun : Item
     private AudioSource gunAudioPlayer;
     public AudioClip shotClip;
     public AudioClip reloadClip;
-    
+
     // 이펙트
     public ParticleSystem muzzleFlashEffect;
     public ParticleSystem shellEjectEffect;
@@ -56,7 +56,7 @@ public class Gun : Item
 
     // 총구 위치와 왼손 위치
     [SerializeField] private Transform fireTransform;
-    public  Transform leftHandMount; 
+    public Transform leftHandMount;
 
     private void Awake()
     {
@@ -73,11 +73,11 @@ public class Gun : Item
     public void Setup(PlayerShooter holder) // 총 초기화    
     {
         // 총 소유자가 누구인지, 총알을 맞아선 안되는 대상들 설정
-        playerShooter = holder;      
-        targetLayer = holder.excludeTarget;     
+        playerShooter = holder;
+        targetLayer = holder.excludeTarget;
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         UIManager.Instance.UpdateAmmoText(magAmmo, magCapacity, ammoRemain); // 탄약 갱신
         currentSpread = 0f;
@@ -99,14 +99,14 @@ public class Gun : Item
             var fireDirection = aimTarget - fireTransform.position; // 목표지점 - 현재 총의 위치 = 목표까지 방향과 거리
 
             // 표준 편차 랜덤을 통한 랜덤 탄착군 형성(1번째 파라미터 = 기준값, 2번째 파라미터= 기준값과의 차이 확률)
-            var precisionX = Utility.GetRandomNormalDistribution(0, currentSpread); 
+            var precisionX = Utility.GetRandomNormalDistribution(0, currentSpread);
             var precisionY = Utility.GetRandomNormalDistribution(0, currentSpread);
 
             // 탄착군 정밀도
             fireDirection = Quaternion.AngleAxis(precisionY, Vector3.up) * fireDirection;
             fireDirection = Quaternion.AngleAxis(precisionX, Vector3.right) * fireDirection;
 
-            currentSpread += 1f/ stability; // 반동 증가
+            currentSpread += 1f / stability; // 반동 증가
 
             lastFireTime = Time.time; // 발사시간 초기화
             Shot(fireTransform.position, fireDirection);
@@ -117,7 +117,7 @@ public class Gun : Item
 
         return false;
     }
-    
+
     private void Shot(Vector3 startPoint, Vector3 direction)
     {
         RaycastHit hit;
@@ -145,7 +145,7 @@ public class Gun : Item
 
             hitPosition = hit.point;
         }
-        else 
+        else
         {
             // 만약 fireDistance 만큼 날아갔는데 충돌한 대상이 없다면
             // 현재위치에서 direction방향으로 fireDistance만큼 간 거리를 hitPosition으로
@@ -180,17 +180,17 @@ public class Gun : Item
 
         bulletLineRenderer.enabled = false;
     }
-    
+
     public bool Reload()
     {
         // 현재 총의 상태가 재장전중이거나, 총 남은 탄약의 수가 없거나, 이미 탄창에 탄약이 가득한 경우)
-        if (state == State.Reloading || ammoRemain <= 0 || magAmmo >= magCapacity )
+        if (state == State.Reloading || ammoRemain <= 0 || magAmmo >= magCapacity)
         {
             return false;
         }
 
         // 재장전 코루틴
-        CoroutineManager.Instance.Run("ReloadRoutine", ReloadRoutine()); 
+        CoroutineManager.Instance.Run("ReloadRoutine", ReloadRoutine());
 
         // 재장전 UI
         UIManager.Instance.ShowReloadUI(reloadTime);
@@ -206,7 +206,7 @@ public class Gun : Item
 
         var ammoToFill = Mathf.Clamp(magCapacity - magAmmo, 0, ammoRemain); // 현재 총의 탄창에 들어갈수 있는 탄약의 수
                                                                             // 채워야 하는 탄의 수를 보유한 총 탄의 수로 짜름
-        // 총알을 초기화 하고 상태를 발사 대기 상태로
+                                                                            // 총알을 초기화 하고 상태를 발사 대기 상태로
         magAmmo += ammoToFill;
         ammoRemain -= ammoToFill;
         UIManager.Instance.UpdateAmmoText(magAmmo, magCapacity, ammoRemain); // 탄약 갱신
@@ -218,14 +218,14 @@ public class Gun : Item
     {
         // 매 프레임마다 반동을 줄임
         currentSpread = Mathf.Clamp(currentSpread, 0f, maxSpread);
-        currentSpread 
+        currentSpread
             = Mathf.SmoothDamp(currentSpread, 0f, ref currentSpreadVelocity, 1f / restoreFromRecoilSpeed);
         // 현재 값, 목표 값,현재 값의 변화량, 지연시간
-        
+
     }
 
     public override void Use(GameObject target)
     {
-         // 아이템 장착   
+        // 아이템 장착   
     }
 }

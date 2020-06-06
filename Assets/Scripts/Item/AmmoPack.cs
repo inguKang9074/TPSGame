@@ -34,7 +34,10 @@ public class AmmoPack : Item
                     if (gun.ammoPack.data.id == data.id) // 맞는 총알이 있다면
                     {
                         gun.ammoRemain += data.count;
-                        Inventory.Instance.AddItem(gun.ammoPack, gun.ammoRemain); 
+
+                        Inventory.Instance.AddItem(gun.ammoPack,
+                            gun.ammoRemain); 
+
                         Inventory.Instance.EquipAmmo(gun.ammoPack);
                         break;
                     }
