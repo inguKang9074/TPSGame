@@ -134,7 +134,7 @@ public class Inventory : MonoBehaviour
                     if (gun.ammoPack.data.id == target.data.id)
                     {
                         alreadyWear = true;
-                        ammoSlots[i].AddItem(target, alreadyWear, target.data.count);
+                        ammoSlots[i].AddItem(target, alreadyWear, gun.ammoRemain);
                         // 총알 갯수 추가
                         break;
                     }

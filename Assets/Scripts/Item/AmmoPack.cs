@@ -35,8 +35,7 @@ public class AmmoPack : Item
                     {
                         gun.ammoRemain += data.count;
 
-                        Inventory.Instance.AddItem(gun.ammoPack,
-                            gun.ammoRemain); 
+                        Inventory.Instance.AddItem(gun.ammoPack, gun.ammoRemain); 
 
                         Inventory.Instance.EquipAmmo(gun.ammoPack);
                         break;
